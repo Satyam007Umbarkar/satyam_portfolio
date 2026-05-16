@@ -1,0 +1,329 @@
+:root {
+    --bg-color: #0a0a0c;
+    --text-color: #ffffff;
+    --accent-color: #00ffcc;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+}
+
+/* ── Canvas ── */
+.canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* ── Nav ── */
+.glass-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.4rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--accent-color); }
+
+/* ── Hero overlay (fixed, fades in on scroll) ── */
+.hero-overlay {
+    position: fixed;
+    bottom: 12%;
+    right: 8%;
+    z-index: 10;
+    text-align: right;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hero-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.hero-sub {
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    color: rgba(255,255,255,0.65);
+    margin-top: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Left-aligned overlay variant */
+.hero-overlay-left {
+    right: auto;
+    left: 8%;
+    text-align: left;
+}
+
+/* Experience stat */
+.exp-stat {
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+}
+
+.exp-plus {
+    color: var(--accent-color);
+}
+
+.exp-label {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 0.4rem;
+}
+
+/* ── Scroll driver ── */
+#scroll-driver {
+    height: 600vh;
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Main content ── */
+.content {
+    position: relative;
+    z-index: 20;
+    background: var(--bg-color);
+}
+
+section {
+    padding: 8rem 10%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+section h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #fff;
+}
+
+section p {
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.75);
+}
+
+.text-center { text-align: center; align-items: center; display: flex; flex-direction: column; }
+
+/* ── Career Timeline ── */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2.42rem;
+    top: 0.4rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.timeline-item.current .timeline-dot {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
+}
+
+.timeline-date {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.timeline-item h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0.4rem 0 0.2rem;
+    color: #fff;
+}
+
+.timeline-role {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 0.8rem;
+}
+
+.timeline-content p {
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+/* ── Project Grid ── */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    padding: 2rem;
+    border-radius: 16px;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 40px rgba(0, 255, 204, 0.08);
+}
+
+.card-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+
+.project-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: #fff;
+}
+
+.project-card p {
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.project-tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+}
+
+.tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.65);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    transition: all 0.25s ease;
+}
+
+.tag:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* ── CTA Button ── */
+.cta-button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2.8rem;
+    background: transparent;
+    color: var(--accent-color);
+    text-decoration: none;
+    border: 1px solid var(--accent-color);
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.4);
+    transform: translateY(-3px);
+}
+
+/* ── Section fade ── */
+.section-fade {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.section-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    section { padding: 5rem 5%; }
+    .hero-overlay { right: 5%; bottom: 10%; }
+    .hero-title { font-size: 1.8rem; }
+}
